@@ -1,20 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+
+import AuthNavigator from "./app/navigation/AuthNavigator";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  return <AuthNavigator />;
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // backgroundColor: 'dodgerblue',
+    // flexDirection: "row",
+    justifyContent: "flex-end",
+
+    // alignItems: 'flex-end',
+
+    // justifyContent: 'center',
+    // width: "75%",
+  },
+  button: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "75%",
   },
 });
