@@ -1,10 +1,13 @@
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import AppNavigator from "./app/navigation/AppNavigator";
 
 import AuthNavigator from "./app/navigation/AuthNavigator";
 
 export default function App() {
-  return <AuthNavigator />;
+  // return <AuthNavigator onLogin={handleTemporaryAuth} />;
+  return <AppNavigator />;
 }
 
 const styles = StyleSheet.create({

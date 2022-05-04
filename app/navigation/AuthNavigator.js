@@ -9,15 +9,16 @@ import WelcomeScreen from "../screens/WelcomeScreen";
 
 const Stack = createNativeStackNavigator();
 
-const AuthNavigator = () => (
+const AuthNavigator = ({ onLogin }) => (
   <NavigationContainer>
+    {console.log("🚀 ~ file: AuthNavigator.js ~ line 14 ~ onLogin", onLogin)}
     <Stack.Navigator>
       <Stack.Screen
         name="Welcome"
         component={WelcomeScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} onLogin={onLogin} />
       <Stack.Screen name="Register" component={RegisterScreen} />
     </Stack.Navigator>
   </NavigationContainer>
