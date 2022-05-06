@@ -1,26 +1,22 @@
 import React, { useState } from "react";
+import { AppRegistry } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import AppNavigator from "./app/navigation/AppNavigator";
 
+import AppNavigator from "./app/navigation/AppNavigator";
 import AuthNavigator from "./app/navigation/AuthNavigator";
 
 export default function App() {
-  // return <AuthNavigator onLogin={handleTemporaryAuth} />;
-  return <AppNavigator />;
+  return (
+    // <AuthNavigator/>
+    <AppNavigator />
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: 'dodgerblue',
-    // flexDirection: "row",
     justifyContent: "flex-end",
-
-    // alignItems: 'flex-end',
-
-    // justifyContent: 'center',
-    // width: "75%",
   },
   button: {
     flex: 1,
