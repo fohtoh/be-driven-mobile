@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Text } from "react-native";
 import Screen from "../components/Screen";
-import { useQuery } from "@apollo/client";
-import gql from "graphql-tag";
-import { AppLoading } from "expo";
 import usersApi from "../api/users";
 import Button from "../components/Button";
 import ActivityIndicator from "../components/ActivityIndicator";
