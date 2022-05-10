@@ -10,8 +10,7 @@ import WelcomeScreen from "../screens/WelcomeScreen";
 const Stack = createNativeStackNavigator();
 
 const AuthNavigator = ({ onLogin }) => (
-  <NavigationContainer>
-    {console.log("🚀 ~ file: AuthNavigator.js ~ line 14 ~ onLogin", onLogin)}
+  <NavigationContainer>    
     <Stack.Navigator>
       <Stack.Screen
         name="Welcome"

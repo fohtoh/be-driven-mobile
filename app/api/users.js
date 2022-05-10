@@ -1,9 +1,7 @@
 import client from "./client";
 
-const endpoint = "/users";
-
 const getUsers = () =>
-  client.post(endpoint, {
+  client.post( "", {
     headers: { "Content-Type": "application/json" },
     query: `query  {
           users{

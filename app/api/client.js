@@ -1,11 +1,12 @@
+import settings from "../config/settings";
+
 import { create } from "apisauce";
 // import cache from "../utility/cache";
 // import authStorage from "../auth/storage";
 // import settings from "../config/settings";
 
 const apiClient = create({
-  // baseURL: settings.apiUrl,
-  baseURL: "http://localhost:3000/api/graphql",
+  baseURL: settings.apiUrl,
 });
 
 // apiClient.addAsyncRequestTransform(async (request) => {
