@@ -13,14 +13,17 @@ import useAuth from "../auth/useAuth";
 const LoginScreen = () => {
   const auth = useAuth();
   const [loginFailed, setLoginFailed] = useState(false);
+  const [failedReason, setFailedReason] = useState();
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async ({ formEmail, formPassword }) => {
     setLoading(true);
+    setLoginFailed(false);
     const result = await authApi.doLogin(
       "jeremy.stowell@gmail.com",
       "drowssap"
     );
+    console.log("🚀 ~ file: LoginScreen.js ~ line 24 ~ handleSubmit ~ result", result)
 
     const session =
       result?.data?.data?.authenticateUserWithPassword?.sessionToken;
@@ -40,7 +43,11 @@ const LoginScreen = () => {
     // } else {
     //   console.log("boo, no token");
     // }
-    if (!result.ok || !session) return setLoginFailed(true); //TODO check for failed
+    if (!result.ok || !session) {
+     setFailedReason(result?.problem);
+      setLoginFailed(true); //TODO check for failed
+      return;
+    }
     setLoginFailed(false);
     // console.log("🚀 ~ file: LoginScreen.js ~ line 17 ~ handleSubmit ~ result", result)
     auth.logIn(userDetails);
@@ -54,6 +61,16 @@ const LoginScreen = () => {
   // } = useApi(authApi.doLogin);
 
   // console.log(loginData)
+
+  if (loginFailed) {
+    return (
+      <Screen>
+        <Text>Login Failed.</Text>
+        <Text>{failedReason}</Text>
+        <Button title="login" onPress={handleSubmit} />
+      </Screen>
+    );
+  }
 
   if (loading) {
     return <ActivityIndicator visible={loading} />;

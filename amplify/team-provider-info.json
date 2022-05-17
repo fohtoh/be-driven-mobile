@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-hoopsdevelopment-staging-22019-authRole",
+      "UnauthRoleArn": "arn:aws:iam::627352801495:role/amplify-hoopsdevelopment-staging-22019-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::627352801495:role/amplify-hoopsdevelopment-staging-22019-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-hoopsdevelopment-staging-22019-deployment",
+      "UnauthRoleName": "amplify-hoopsdevelopment-staging-22019-unauthRole",
+      "StackName": "amplify-hoopsdevelopment-staging-22019",
+      "StackId": "arn:aws:cloudformation:us-east-1:627352801495:stack/amplify-hoopsdevelopment-staging-22019/e65c1b60-d587-11ec-a268-0a6a239579c7",
+      "AmplifyAppId": "d3eflgyq035ko7"
+    },
+    "categories": {
+      "auth": {
+        "hoopsdevelopment": {}
+      }
+    }
+  }
+}
