@@ -1,41 +1,60 @@
-import React, { useState } from "react";
-import { Text } from "react-native";
+import React, { useState, useContext } from "react";
+import { Formik } from "formik";
+import { Text, Alert } from "react-native";
+import jwtDecode from "jwt-decode";
 
-import Screen from "../components/Screen";
 import Button from "../components/Button";
+import Screen from "../components/Screen";
+import TextInput from "../components/TextInput";
 
 import authApi from "../api/auth";
-// import usersApi from "../api/users";
 import ActivityIndicator from "../components/ActivityIndicator";
 import useApi from "../hooks/useApi";
-import useAuth from "../auth/useAuth";
+import AuthContext from "../auth/context";
+// import useAuth from "../auth/useAuth";
+import { Auth } from "aws-amplify";
+import authStorage from "../auth/storage";
 
-const LoginScreen = () => {
-  const auth = useAuth();
+const LoginScreen = ({ navigation }) => {
+  const authContext = useContext(AuthContext);
+  // const auth = useAuth();
   const [loginFailed, setLoginFailed] = useState(false);
   const [failedReason, setFailedReason] = useState();
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async ({ formEmail, formPassword }) => {
+  const handleLogin = async ({ email, password }) => {
     setLoading(true);
     setLoginFailed(false);
-    const result = await authApi.doLogin(
-      "jeremy.stowell@gmail.com",
-      "drowssap"
-    );
-    console.log("🚀 ~ file: LoginScreen.js ~ line 24 ~ handleSubmit ~ result", result)
+    try {
+      const response = await Auth.signIn(email, password);
+      console.log(`response`, response);
+      // const user = jwtDecode(response?.accessToken?.jwtToken)
 
-    const session =
-      result?.data?.data?.authenticateUserWithPassword?.sessionToken;
+      //TODO - what do I need to store?  Decoded or not?  If not, how do I know it is valid?
+      // const user = response?.signInUserSession?.accessToken?.jwtToken;
+
+      // authContext.setUser(user);
+      authContext.setUser(response);
+
+      //Set user locally
+      authStorage.storeToken(
+        response?.signInUserSession?.accessToken?.jwtToken
+      );
+    } catch (e) {
+      Alert.alert("Oops", e.message);
+    }
+
+    // const session =
+    //   result?.data?.data?.authenticateUserWithPassword?.sessionToken;
     // const name = result?.data?.data?.authenticateUserWithPassword?.item?.name;
     // const email =
     //   result?.data?.data?.authenticateUserWithPassword?.item?.email;
 
-    const userDetails = {
-      session,
-      name: result?.data?.data?.authenticateUserWithPassword?.item?.name,
-      email: result?.data?.data?.authenticateUserWithPassword?.item?.email,
-    };
+    // const userDetails = {
+    //   session,
+    //   name: result?.data?.data?.authenticateUserWithPassword?.item?.name,
+    //   email: result?.data?.data?.authenticateUserWithPassword?.item?.email,
+    // };
 
     // console.log(result?.data?.data?.authenticateUserWithPassword?.sessionToken);
     // if (result?.data?.data?.sessionToken) {
@@ -43,15 +62,19 @@ const LoginScreen = () => {
     // } else {
     //   console.log("boo, no token");
     // }
-    if (!result.ok || !session) {
-     setFailedReason(result?.problem);
-      setLoginFailed(true); //TODO check for failed
-      return;
-    }
-    setLoginFailed(false);
-    // console.log("🚀 ~ file: LoginScreen.js ~ line 17 ~ handleSubmit ~ result", result)
-    auth.logIn(userDetails);
+    // if (!result.ok || !session) {
+    //  setFailedReason(result?.problem);
+    //   setLoginFailed(true); //TODO check for failed
+    //   return;
+    // }
+    // setLoginFailed(false);
+    // // console.log("🚀 ~ file: LoginScreen.js ~ line 17 ~ handleSubmit ~ result", result)
+    // auth.logIn(userDetails);
     setLoading(false);
+  };
+
+  const handleForgotPassword = () => {
+    navigation.navigate("ForgotPassword");
   };
   // const {
   //   data: loginData,
@@ -75,14 +98,42 @@ const LoginScreen = () => {
   if (loading) {
     return <ActivityIndicator visible={loading} />;
   }
-  
+
   return (
     <Screen>
-      
-      
       <Text>Login Screen</Text>
 
-      <Button title="login" onPress={handleSubmit} />
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        onSubmit={(values) => handleLogin(values)}
+      >
+        {({ handleChange, handleSubmit }) => (
+          <>
+            <TextInput
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="email"
+              keyboardType="email-address"
+              onChangeText={handleChange("email")}
+              placeholder="Email"
+              textContextType="emailAddress"
+            />
+            <TextInput
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="lock"
+              onChangeText={handleChange("password")}
+              placeholder="Password"
+              secureTextEntry
+              textContextType="password"
+            />
+            <Button title="Login" onPress={handleSubmit} />
+            <Button title="Forgot Password" onPress={handleForgotPassword} />
+          </>
+        )}
+      </Formik>
+
+      {/* <Button title="login" onPress={handleSubmit} /> */}
       {/* <Formik
         initialValues={{ email: '', password: '' }}
         onSubmit={values => console.log(values)}
