@@ -54,7 +54,7 @@ const RegisterScreen = ({ navigation }) => {
               textContextType="password"
             />
             <TextInput
-              autoCapitalize
+              autoCapitalize="name"
               autoCorrect={false}
               icon="lock"
               onChangeText={handleChange("fullName")}

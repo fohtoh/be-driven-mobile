@@ -11,6 +11,9 @@ import { color } from "react-native/Libraries/Components/View/ReactNativeStyleAt
 import colors from "../config/colors";
 import DetailsScreen from "../screens/DetailsScreen";
 import { FontAwesome } from "@expo/vector-icons";
+import NewListingButton from "./NewListingButton";
+import ListingsEditScreen from "../screens/ListingsEditScreen";
+
 
 const Tab = createBottomTabNavigator();
 
@@ -43,15 +46,27 @@ const TabNavigator = () => (
       }}
     />
     <Tab.Screen
+      name="ListingEdit"
+      component={ListingsEditScreen}
+      options={({ navigation }) => ({
+        tabBarButton: () => (
+          <NewListingButton onPress={() => navigation.navigate("ListingEdit")} />
+        ),
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons
+            name="card-account-details-outline"
+            color={color}
+            size={size}
+          />
+        ),
+      })}
+    />
+    <Tab.Screen
       name="Feed"
       component={FeedScreen}
       options={{
         tabBarIcon: ({ color, size }) => (
-          <FontAwesome
-            name="group"
-            color={color}
-            size={size}
-          />
+          <FontAwesome name="group" color={color} size={size} />
         ),
       }}
     />
