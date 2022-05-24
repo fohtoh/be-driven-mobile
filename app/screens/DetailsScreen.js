@@ -5,7 +5,8 @@ import Screen from '../components/Screen';
 const DetailsScreen = () => {
   return (
     <Screen>
-      <Text>Details Screen</Text>
+      <Text>Details Screen</Text>      
+
  </Screen>
   );
 };

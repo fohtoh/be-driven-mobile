@@ -6,7 +6,7 @@ import { Text, Alert } from "react-native";
 
 import ActivityIndicator from "../components/ActivityIndicator";
 import AuthContext from "../auth/context";
-import authStorage from "../auth/storage";
+// import authStorage from "../auth/storage";
 import Button from "../components/Button";
 import Screen from "../components/Screen";
 import TextInput from "../components/TextInput";
@@ -28,12 +28,26 @@ const LoginScreen = ({ navigation }) => {
     try {
       //TODO - what do I need to store?  Decoded or not?  If not, how do I know it is valid?
       const response = await Auth.signIn(email, password);
-      authContext.setUser(response);
+      Auth.currentAuthenticatedUser()
+        .then((user) => {
+          console.log("🚀 ~ file: LoginScreen.js ~ line 33 ~ .then ~ user", user)
+          
+          authContext.setUser(user);
+        })
+        .catch((err) => {
+          console.log("🚀 ~ file: LoginScreen.js ~ line 38 ~ handleLogin ~ err", err)
+          
+          // setUser();
+        });
+      
+      
+      
+      // authContext.setUser(response);
 
       //Set user locally
-      authStorage.storeToken(
-        response?.signInUserSession?.accessToken?.jwtToken
-      );
+      // authStorage.storeToken(
+      //   response?.signInUserSession?.accessToken?.jwtToken
+      // );
     } catch (e) {
       Alert.alert("Oops", e.message);
     }

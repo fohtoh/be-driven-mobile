@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Be Driven",
-    "slug": "be-driven",
-    "version": "0.0.1",
+    "name": "Hoops Development",
+    "slug": "hoops-development",
+    "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
     "splash": {

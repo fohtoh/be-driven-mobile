@@ -12,8 +12,7 @@ import colors from "../config/colors";
 import DetailsScreen from "../screens/DetailsScreen";
 import { FontAwesome } from "@expo/vector-icons";
 import NewListingButton from "./NewListingButton";
-import ListingsEditScreen from "../screens/ListingsEditScreen";
-
+import RecordActivityScreen from "../screens/RecordActivityScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -46,11 +45,13 @@ const TabNavigator = () => (
       }}
     />
     <Tab.Screen
-      name="ListingEdit"
-      component={ListingsEditScreen}
+      name="Record Activity"
+      component={RecordActivityScreen}
       options={({ navigation }) => ({
         tabBarButton: () => (
-          <NewListingButton onPress={() => navigation.navigate("ListingEdit")} />
+          <NewListingButton
+            onPress={() => navigation.navigate("Record Activity")}
+          />
         ),
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons
