@@ -19,7 +19,7 @@ Amplify.configure(config);
 function App() {
   const [user, setUser] = useState();
   const [isReady, setIsReady] = useState(false);
-  //TODO what validates that the given JWT is valid/expired/etc.
+  //TODO what validates that the given JWT is valid/expired/etc.  How do I know that it has expired?
 
   const restoreToken = async () => {
     await Auth.currentAuthenticatedUser()
@@ -44,7 +44,7 @@ function App() {
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
-      {user ? <AppNavigator /> : <AuthNavigator />}
+      {user ? <AppNavigator /> : <AuthNavigator />}            
     </AuthContext.Provider>
   );
 }

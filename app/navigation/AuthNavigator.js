@@ -24,8 +24,8 @@ const AuthNavigator = ({ onLogin }) => (
       <Stack.Screen name="Login" component={LoginScreen} onLogin={onLogin} />
       <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen name="Confirmation" component={RegistrationConfirmationScreen} />
-      <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
-      <Stack.Screen name="NewPassword" component={NewPasswordScreen} />
+      <Stack.Screen name="Forgot Password" component={ForgotPasswordScreen} />
+      <Stack.Screen name="New Password" component={NewPasswordScreen} />
     </Stack.Navigator>
   </NavigationContainer>
 );
