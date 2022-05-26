@@ -51,8 +51,8 @@ const RecordActivityScreen = () => {
         <Heading> {moment().format("MMMM Do YYYY")} </Heading>
       <ScrollView>
 
-        {data?.map((item) => {
-          return <Checkbox data={item} />;
+        {data?.map((item, index) => {
+          return <Checkbox key={index} data={item} />;
         })}
       </ScrollView>
     </Screen>
